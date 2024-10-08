@@ -9,7 +9,7 @@ import { CommentModule } from './comment/comment.module';
 
 
 @Module({
-  imports: [BoardModule, DatabaseModule, BoardsModule, LoginModule, CommentModule],
+  imports: [BoardModule, BoardsModule, LoginModule, CommentModule],
   controllers: [AppController],
   providers: [AppService],
 })

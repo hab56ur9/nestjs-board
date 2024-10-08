@@ -6,29 +6,15 @@ import { UpdateLoginDto } from './dto/update-login.dto';
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
-
+  
+  // 새로운 로그인 시도
   @Post()
   create(@Body() createLoginDto: CreateLoginDto) {
-    return this.loginService.create(createLoginDto);
+    return "try login"
   }
-
+  // 로그인 페이지 반환
   @Get()
   findAll() {
-    return this.loginService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.loginService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoginDto: UpdateLoginDto) {
-    return this.loginService.update(+id, updateLoginDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.loginService.remove(+id);
+    return "this request must return login page"
   }
 }
