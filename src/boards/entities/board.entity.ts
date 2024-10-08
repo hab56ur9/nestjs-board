@@ -1,5 +1,8 @@
+import { Entity } from "typeorm";
+
+@Entity()
 export class Board {
-    id:number;
+    id: number;
     title:string;
     content:string;
     commentId:number;
