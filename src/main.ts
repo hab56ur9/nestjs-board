@@ -10,6 +10,8 @@ async function bootstrap() {
     forbidNonWhitelisted:true,
     transform:true,
   }),);
+
+  /* testing */
   const config = new DocumentBuilder()
     .setTitle('Cats example')
     .setDescription('The cats API description')
@@ -18,6 +20,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  /* end testing */
+
   await app.listen(3000);
 }
 bootstrap();

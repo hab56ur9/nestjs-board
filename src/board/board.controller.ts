@@ -1,16 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
-@Controller('board')
-export class BoardController {
-  constructor(private readonly boardService: BoardService) {}
 
+@Controller('api/board')
+export class BoardController {
+  
+  constructor(private readonly boardService: BoardService) {}
+  
+  // 모든 게시글 조회
+  @Get()
+  getAll(@Query('page')page:number, @Query('size') size:number){
+    return this.boardService.getAll(+page,+size);
+  }
   // 게시판 생성
   @Post()
   create(@Body() createBoardDto: CreateBoardDto) {
-    return `create a new board ${createBoardDto}`
+    return this.boardService.create(createBoardDto);
   }
 
   //게시글 내용 가져오기

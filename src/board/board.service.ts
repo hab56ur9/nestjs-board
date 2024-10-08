@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
-
+import { Board } from './entities/board.entity';
 @Injectable()
 export class BoardService {
-  create(createBoardDto: CreateBoardDto) {
-    return 'This action adds a new board';
+  private board:Board[] = [
+    {
+      id:1,
+      title:"test title1",
+      content:"test content test content test content test content",
+      commentId:1
+    },
+    {
+      id:2,
+      title:"test title2",
+      content:"test content test content test content test content",
+      commentId:2
+    },
+    {
+      id:3,
+      title:"test title3",
+      content:"test content test content test content test content",
+      commentId:3
+    },
+  ];
+
+  getAll(page:number,size:number){
+    //TODO page,size별로 잘라서 주기
+    return this.board;
   }
 
-  findAll() {
-    return `This action returns all board`;
+  create(createBoardDto: CreateBoardDto) {
+    this.board.push({
+      id:this.board.length+1,
+      ...createBoardDto,
+      commentId:this.board.length+1
+    })
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} board`;
+    //TODO DB연결 로직으로 변경
+    const board = this.board.find(board=>board.id == id)
+    if(!board){
+      throw new NotFoundException(`Movie with ID:${id} not found.`);
+    }
+    return board;
   }
 
   update(id: number, updateBoardDto: UpdateBoardDto) {
-    return `This action updates a #${id} board`;
+    const board = this.findOne(id);
+    this.remove(id);
+    this.board.push({...board,...updateBoardDto});
   }
 
   remove(id: number) {
-    return `This action removes a #${id} board`;
+    // DB 로직으로 변경
+    this.findOne(id);
+    this.board = this.board.filter(movie=>movie.id !== +id);
   }
 }
