@@ -29,7 +29,8 @@ export class BoardController {
   //게시글 내용 가져오기
   @Put(':id')
   update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
-    return this.boardService.update(+id, updateBoardDto);
+    this.boardService.update(+id, updateBoardDto);
+    return;
   }
 
   // 게시글 삭제
