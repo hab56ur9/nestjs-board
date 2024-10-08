@@ -11,8 +11,10 @@ export class BoardController {
   
   // 모든 게시글 조회
   @Get()
-  getAll(@Query('page')page:number, @Query('size') size:number){
-    return this.boardService.getAll(+page,+size);
+  async getAll( @Query('page') page:number=1, 
+          @Query('size') size:number=10)
+  { 
+    return await this.boardService.getBoards(+page,+size);
   }
   // 게시판 생성
   @Post()
@@ -29,7 +31,8 @@ export class BoardController {
   //게시글 내용 가져오기
   @Put(':id')
   update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
-    return this.boardService.update(+id, updateBoardDto);
+    this.boardService.update(+id, updateBoardDto);
+    return;
   }
 
   // 게시글 삭제

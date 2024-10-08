@@ -14,9 +14,9 @@ export class CommentController {
   }
   // 댓글 모두 가져오기
   @Get()
-  getAll(@Query('id') board_id: number) {
+  findAll(@Query('id') board_id: number) {
     console.log("testing")
-    return this.commentService.getAll(+board_id);
+    return this.commentService.findAll(+board_id);
   }
 
   @Put(':id')

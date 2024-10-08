@@ -3,14 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BoardModule } from './board/board.module';
 
-import { BoardsModule } from './boards/boards.module';
 
 import { CommentModule } from './comment/comment.module';
 import { UsersModule } from './users/users.module';
+import { DatabaseModule } from './database/database.module';
 
 
 @Module({
-  imports: [BoardModule, BoardsModule, CommentModule, UsersModule],
+  imports: [BoardModule, CommentModule,DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })
