@@ -1,4 +1,4 @@
-import { Entity,Column,PrimaryGeneratedColumn, PrimaryColumn } from "typeorm";
+import { Entity,Column,PrimaryGeneratedColumn} from "typeorm";
 @Entity()
 export class Board {
     @PrimaryGeneratedColumn()
@@ -7,6 +7,4 @@ export class Board {
     title:string;
     @Column()
     content:string;
-    @Column()
-    commentId:number;
 }

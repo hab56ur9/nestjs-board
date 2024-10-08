@@ -11,8 +11,10 @@ export class BoardController {
   
   // 모든 게시글 조회
   @Get()
-  getAll(@Query('page')page:number, @Query('size') size:number){
-    return this.boardService.getAll(+page,+size);
+  async getAll( @Query('page') page:number=1, 
+          @Query('size') size:number=10)
+  { 
+    return await this.boardService.getBoards(+page,+size);
   }
   // 게시판 생성
   @Post()

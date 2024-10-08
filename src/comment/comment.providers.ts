@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
+import { Comment } from './entities/comment.entity';
 
-
-export const commentProvider = [
+export const commentProviders = [
     {
-        provider: 'COMMENT_REPOSITORY',
+        provide: 'COMMENT_REPOSITORY',
         useFactory: (dataSource:DataSource) => dataSource.getRepository(Comment),
         inject:["DATA_SOURCE"],
     }

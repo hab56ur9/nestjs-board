@@ -1,64 +1,43 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
+import { Repository } from 'typeorm';
+
 @Injectable()
 export class BoardService {
-  private board:Board[] = [
-    {
-      id:1,
-      title:"test title1",
-      content:"test content test content test content test content",
-      commentId:1
-    },
-    {
-      id:2,
-      title:"test title2",
-      content:"test content test content test content test content",
-      commentId:2
-    },
-    {
-      id:3,
-      title:"test title3",
-      content:"test content test content test content test content",
-      commentId:3
-    },
-  ];
+  constructor(
+    @Inject('BOARD_REPOSITORY') 
+    private boardRepo:Repository<Board>
+  ){}
 
-  getAll(page:number,size:number){
-    //TODO page,size별로 잘라서 주기
-    return this.board;
+  async getBoards(page: number, pageSize: number): Promise<Board[]> {
+     // 페이지네이션 없이 모든 데이터 가져오기
+     return await this.boardRepo.find();
   }
 
-  create(createBoardDto: CreateBoardDto) {
-    this.board.push({
-      id:this.board.length+1,
-      ...createBoardDto,
-      commentId:this.board.length+1
-    })
+  // this works
+  async create(createBoardDto: CreateBoardDto): Promise<void> {
+    await this.boardRepo.insert({
+      ...createBoardDto
+    });
   }
 
-  findOne(id: number) {
-    //TODO DB연결 로직으로 변경
-    const board = this.board.find(board=>board.id == id)
-    if(!board){
+  async findOne(id: number): Promise<Board> {    
+    const board = await this.boardRepo.findOne({ where: { id } });
+    if (!board) {
       throw new NotFoundException(`Movie with ID:${id} not found.`);
     }
     return board;
   }
 
-  update(id: number, updateBoardDto: UpdateBoardDto) {
-    const board = this.findOne(id);
-    this.remove(id);
-    this.board.push({...board,...updateBoardDto});
+  async update(id: number, updateBoardDto: UpdateBoardDto): Promise<void> {
+    this.findOne(id);
+    await this.boardRepo.update(id, updateBoardDto);
   }
 
-  remove(id: number) {
-    // DB 로직으로 변경
-    // 이거 바뀌어야할수도
-
-    // 이거 실패하면 없다는 뜻으로 not found exception검증용임
+  async remove(id: number): Promise<void> {
     this.findOne(id);
-    this.board = this.board.filter(movie=>movie.id !== +id);
+    await this.boardRepo.delete(id);
   }
 }
