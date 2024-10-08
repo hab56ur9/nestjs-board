@@ -55,6 +55,9 @@ export class BoardService {
 
   remove(id: number) {
     // DB 로직으로 변경
+    // 이거 바뀌어야할수도
+
+    // 이거 실패하면 없다는 뜻으로 not found exception검증용임
     this.findOne(id);
     this.board = this.board.filter(movie=>movie.id !== +id);
   }

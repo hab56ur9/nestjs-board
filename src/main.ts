@@ -10,7 +10,9 @@ async function bootstrap() {
     forbidNonWhitelisted:true,
     transform:true,
   }),);
-
+  
+  // 모든 요청에대해 CQRS 허용
+  app.enableCors(); 
   /* testing */
   const config = new DocumentBuilder()
     .setTitle('Cats example')
