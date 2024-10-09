@@ -7,8 +7,8 @@ import { BoardModule } from './board/board.module';
 import { CommentModule } from './comment/comment.module';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
-import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
+
 
 
 
@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     ,CommentModule
     ,DatabaseModule
     ,UsersModule
-    ,JwtModule, AuthModule
+    ,AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
