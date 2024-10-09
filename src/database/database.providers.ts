@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Board } from 'src/board/entities/board.entity';
 import { Comment } from 'src/comment/entities/comment.entity';
+import { User } from 'src/users/entities/user.entity';
 
 
 export const databaseProviders = [
@@ -15,7 +16,7 @@ export const databaseProviders = [
         password: 'postgres',
         database: 'postgres',
         entities: [
-            Board,Comment
+            Board,Comment,User
         ],
         synchronize: true,
       });
