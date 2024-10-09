@@ -1,6 +1,5 @@
 import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
@@ -18,11 +17,11 @@ export class UsersService {
     pass: string,
   ): Promise<{ access_token: string }> {
     const user = await this.findUserByEmail(email);
-    console.log(user);
+
     if (user?.password !== pass) {
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.email, useremail: user.email };
+    const payload = { sub: user.email, username: user.name };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
