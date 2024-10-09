@@ -23,10 +23,10 @@ export class BoardService {
     });
   }
 
-  async findOne(id: number): Promise<Board> {    
-    const board = await this.boardRepo.findOne({ where: { id } });
+  async findOne(uuid: number): Promise<Board> {    
+    const board = await this.boardRepo.findOne({ where: { uuid } });
     if (!board) {
-      throw new NotFoundException(`Movie with ID:${id} not found.`);
+      throw new NotFoundException(`Movie with ID:${uuid} not found.`);
     }
     return board;
   }

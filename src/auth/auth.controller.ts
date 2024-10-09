@@ -2,8 +2,8 @@ import { Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 import { SignInDto } from './dto/sign-in.dto';
+import { SignUpDto } from './dto/sign-up.dto';
 import { FormData } from './decorator/form-data.decorator';
-import { AuthGuard } from './auth.guard';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -15,7 +15,7 @@ export class AuthController {
     }
 
     @Post('sign-up')
-    signUp(@FormData() signUpDto:SignInDto) {
+    signUp(@FormData() signUpDto:SignUpDto) {
         return this.authService.signUp(signUpDto);
     }
 }

@@ -28,7 +28,7 @@ export class CommentService {
   
   }
   async findOne(comment_id:number):Promise<Comment>{
-    const comment = await this.commentRepo.findOne({where:{id:comment_id}});
+    const comment = await this.commentRepo.findOne({where:{uuid:comment_id}});
     if(!comment){
       throw new NotFoundException(`Comment with ID:${comment_id} not found.`);
     }

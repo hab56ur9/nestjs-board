@@ -1,10 +1,12 @@
 import { Entity,Column,PrimaryGeneratedColumn} from "typeorm";
+
 @Entity()
 export class Board {
-    @PrimaryGeneratedColumn()
-    id:number;
+    @PrimaryGeneratedColumn('uuid')
+    uuid:number;
     @Column()
     title:string;
     @Column()
     content:string;
+  
 }
