@@ -8,6 +8,7 @@ import { CommentModule } from './comment/comment.module';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -18,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
     ,CommentModule
     ,DatabaseModule
     ,UsersModule
-    ,JwtModule
+    ,JwtModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
