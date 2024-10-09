@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from "typeor
 
 @Entity()
 export class Comment {
-    @PrimaryGeneratedColumn('uuid')
-    uuid:number;
+    @PrimaryGeneratedColumn()
+    id:number;
     @Column()
     userId:number;
     @Column()
